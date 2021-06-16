@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace ETL_Common
 {
-    public class ConfigurationManager
+    public static class ConfigurationManager
     {
         public readonly static IConfiguration configuration;
 

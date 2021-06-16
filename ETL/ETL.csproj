@@ -8,4 +8,11 @@
     <PackageReference Include="Swashbuckle.AspNetCore" Version="5.6.3" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\ETL_Common\ETL_Common.csproj" />
+    <ProjectReference Include="..\ETL_IRepository\ETL_IRepository.csproj" />
+    <ProjectReference Include="..\ETL_Model\ETL_Model.csproj" />
+    <ProjectReference Include="..\ETL_Repository\ETL_Repository.csproj" />
+  </ItemGroup>
+
 </Project>

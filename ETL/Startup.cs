@@ -1,3 +1,5 @@
+using ETL_IRepository;
+using ETL_Repository.etl_task_info;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
@@ -31,6 +33,10 @@ namespace ETL
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ETL", Version = "v1" });
             });
+
+            services.AddScoped<Ietl_task_infoRepository, etl_task_infoRepository>();
+            services.AddScoped<ETL_Common.DapperHelper>();
+
 
             // 配置跨域处理，允许所有来源
             services.AddCors(options =>
