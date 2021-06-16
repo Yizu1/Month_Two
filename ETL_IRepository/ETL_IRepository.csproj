@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ETL_Common\ETL_Common.csproj" />
+    <ProjectReference Include="..\ETL_Model\ETL_Model.csproj" />
+  </ItemGroup>
+
+</Project>
