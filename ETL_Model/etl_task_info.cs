@@ -6,6 +6,25 @@ using System.Threading.Tasks;
 
 namespace ETL_Model
 {
+    public enum weight
+    {
+        紧急任务,
+        高,
+        中,
+        低
+    }
+    public enum process_status
+    {
+        待执行 = -1,
+        可执行,
+        正在执行,
+        执行完成
+    }
+    public enum status
+    {
+        有错误=0,
+        无错误
+    }
     //任务信息表
     public class etl_task_info
     {
@@ -17,15 +36,18 @@ namespace ETL_Model
         /// <summary>
         /// 任务权重级别 0紧急任务1高2中3低
         /// </summary>
-        public int weight { get; set; }
+        public weight weight { get; set; }
+        public string weights { get=>weight.ToString(); }
         /// <summary>
         /// 任务执行状态 -1待执行 0可执行 1正在执行 2执行完成
         /// </summary>
-        public int process_status { get; set; }
+        public process_status process_status { get; set; }
+        public string process_statuss { get=>process_status.ToString();   }
         /// <summary>
         /// 任务状态 1无错误0有错误
         /// </summary>
-        public int status { get; set; }
+        public status status { get; set; }
+        public string statuss { get=>status.ToString();  }
         /// <summary>
         /// 总处理条数
         /// </summary>

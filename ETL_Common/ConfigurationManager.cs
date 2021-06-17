@@ -22,5 +22,9 @@ namespace ETL_Common
         {
             get { return configuration.GetConnectionString("MySqlConnection"); }
         }
+        public static string serverconn
+        {
+            get { return configuration.GetConnectionString("SqlConnection"); }
+        }
     }
 }

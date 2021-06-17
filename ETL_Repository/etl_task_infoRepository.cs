@@ -19,7 +19,6 @@ namespace ETL_Repository.etl_task_info
         {
             string sql = $"delete from etl_task_info where id in({ids})";
             return _logger.CUD(sql);
-
         }
 
         public List<ETL_Model.etl_task_info> GetList()
@@ -28,22 +27,22 @@ namespace ETL_Repository.etl_task_info
             return _logger.GetList<ETL_Model.etl_task_info>(sql);
         }
 
-        public int Insert(ETL_Model.etl_task_info model)
+        public int Insert(ETL_Model.etl_task_info m)
         {
-            String sql = "insert into etl_task_info  values(null,)";
-            return _logger.CUD(sql);
-
-            throw new NotImplementedException();
+            string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','',null)";
+            return _logger.CUD(sql,m);
         }
 
-        public ETL_Model.etl_task_info TheFill(int id)
+        public ETL_Model.etl_task_info TheFill(string id)
         {
-            throw new NotImplementedException();
+            string sql = $"select * from etl_task_info where id = '{id}'";
+            return _logger.Fant<ETL_Model.etl_task_info>(sql);
         }
 
         public int Update(ETL_Model.etl_task_info model)
         {
-            throw new NotImplementedException();
+            string sql = "update etl_task_info set ";
+            return _logger.CUD(sql);
         }
     }
 }
