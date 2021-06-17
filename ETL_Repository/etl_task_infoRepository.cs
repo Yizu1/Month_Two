@@ -32,17 +32,21 @@ namespace ETL_Repository.etl_task_info
         {
             String sql = "insert into etl_task_info  values(null,)";
             return _logger.CUD(sql);
-
-            throw new NotImplementedException();
+             
         }
 
         public ETL_Model.etl_task_info TheFill(int id)
         {
-            throw new NotImplementedException();
+            string sql = "select * from etl_task_info where id = {id}";
+
+            return _logger.Fant<ETL_Model.etl_task_info>(sql);
         }
 
         public int Update(ETL_Model.etl_task_info model)
         {
+            string sql = "update etl_task_info set ";
+            return _logger.CUD(sql);
+
             throw new NotImplementedException();
         }
     }
