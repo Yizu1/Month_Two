@@ -5,6 +5,7 @@ namespace ETL_Model
     public class dictionaries
     {
         public int Id { get; set; }
+        public bool hasChildren { get; set; }
         public string Coding { get; set; }
         public string Name { get; set; }
         public int PName { get; set; }

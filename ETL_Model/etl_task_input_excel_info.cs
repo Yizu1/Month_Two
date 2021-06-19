@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace ETL_Model
 {
-    //任务结果输出表
-    public class etl_task_output_info
+     public class etl_task_input_excel_info
     {
+        //任务数据输入excel表
         public string id { get; set; }
         /// <summary>
-        /// 节点ID
+        /// 节点id
         /// </summary>
         public string node_id { get; set; }
         /// <summary>
@@ -23,41 +23,33 @@ namespace ETL_Model
         /// </summary>
         public string task_id { get; set; }
         /// <summary>
-        /// 选择节点Id
+        /// excel文件存储位置
         /// </summary>
-        public string select_node_id { get; set; }
+        public string task_excel_file { get; set; }
         /// <summary>
-        /// 选择表名称
+        /// excel文件读取sheet页
         /// </summary>
-        public string select_node_table { get; set; }
+        public string task_excel_sheet { get; set; }
         /// <summary>
-        /// 选择字段名称
+        /// excel表头信息
         /// </summary>
-        public string select_node_field { get; set; }
-        /// <summary>
-        /// 记录级别处理方案
-        /// </summary>
-        public string annal_engine { get; set; }
-        /// <summary>
-        /// 字段级别处理方案
-        /// </summary>
-        public string field_engine { get; set; }
+        public string task_excel_id { get; set; }
         /// <summary>
         /// 创建人
         /// </summary>
         public string create_by { get; set; }
         /// <summary>
-        ///创建时间
+        /// 创建时间
         /// </summary>
-        public DateTime create_time { get; set; }
+        public string create_time { get; set; }
         /// <summary>
-        /// 更新人
+        /// 修改人
         /// </summary>
         public string update_by { get; set; }
         /// <summary>
-        /// 更新时间
+        /// 修改时间
         /// </summary>
-        public DateTime update_time { get; set; }
+        public string update_time { get; set; }
 
     }
 }

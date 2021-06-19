@@ -57,10 +57,10 @@ namespace ETL_Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dictionaries TheFill(int id)
+        public dictionaries TheFill(string id)
         {
             string sql = "select * from dictionaries";
-            return _dapperHelper.GetList<dictionaries>(sql).FirstOrDefault(x => x.Id == id);
+            return _dapperHelper.GetList<dictionaries>(sql).FirstOrDefault(x => x.Id.ToString() == id);
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace ETL_Repository
         /// <returns></returns>
         public int Update(dictionaries model)
         {
-            string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',PName={model.PName},Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
+            string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
             return _dapperHelper.CUD(sql);
         }
     }
