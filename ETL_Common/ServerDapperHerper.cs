@@ -1,13 +1,15 @@
 ﻿using Dapper;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace ETL_Common
 {
-    public class DapperHelper
+   public  class ServerDapperHerper
     {
         #region
 
@@ -18,7 +20,7 @@ namespace ETL_Common
         /// <returns></returns>
         public T Scalar<T>(string sql)
         {
-            using (IDbConnection sc = new MySql.Data.MySqlClient.MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
@@ -43,7 +45,7 @@ namespace ETL_Common
         /// <returns></returns>
         public T Fant<T>(string sql)
         {
-            using (IDbConnection sc = new MySql.Data.MySqlClient.MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
@@ -67,7 +69,7 @@ namespace ETL_Common
         /// <returns></returns>
         public int CUD(string sql)
         {
-            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
@@ -85,11 +87,11 @@ namespace ETL_Common
         /// <summary>
         /// 新增，修改等
         /// </summary>
-        /// <param name="MySql"></param>
+        /// <param name="Sql"></param>
         /// <returns></returns>
         public int CUD<T>(string sql, T I)
         {
-            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 sc.Open();
                 try
@@ -113,8 +115,7 @@ namespace ETL_Common
 
         public List<T> GetList<T>(string sql)
         {
-
-            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
@@ -131,6 +132,5 @@ namespace ETL_Common
         }
 
         #endregion
-
     }
 }

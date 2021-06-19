@@ -1,5 +1,6 @@
 using ETL_Common;
 using ETL_IRepository;
+using ETL_Repository.etl_task_info;
 using ETL_Repository;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,7 +26,7 @@ namespace ETL
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
 
@@ -35,6 +36,8 @@ namespace ETL
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ETL", Version = "v1" });
             });
 
+            services.AddScoped<Ietl_task_infoRepository, etl_task_infoRepository>();
+            services.AddScoped<ETL_Common.DapperHelper>();
             services.AddScoped<DapperHelper>();
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
 

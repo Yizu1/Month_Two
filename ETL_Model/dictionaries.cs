@@ -12,5 +12,6 @@ namespace ETL_Model
         public int States { get; set; }
         public int Sort { get; set; }
         public string Remark { get; set; }
+        public bool hasChildren { get; set; }
     }
 }
