@@ -43,6 +43,6 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="id">主键Id</param>
         /// <returns></returns>
-        T TheFill(int id);
+        T TheFill(string id);
     }
 }

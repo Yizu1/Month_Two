@@ -4,12 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETL_Repository
+namespace ETL_IRepository
 {
-
-    public  class BaseRepository
+    public interface Ietl_task_infoRepository:IBaseRepository<ETL_Model.etl_task_info>
     {
-
 
     }
 }
