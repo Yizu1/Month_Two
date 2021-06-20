@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 namespace ETL_Common
 {
     public static class ConfigurationManager
+    public class ConfigurationManager
     {
         public readonly static IConfiguration configuration;
 
@@ -23,6 +24,10 @@ namespace ETL_Common
         public static string conn
         {
             get { return configuration.GetConnectionString("MySqlConnection"); }
+        }
+        public static string serverconn
+        {
+            get { return configuration.GetConnectionString("SqlConnection"); }
         }
     }
 }
