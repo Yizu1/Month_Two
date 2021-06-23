@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="ServiceStack.Redis" Version="5.11.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ETL_Common\ETL_Common.csproj" />
     <ProjectReference Include="..\ETL_Model\ETL_Model.csproj" />
   </ItemGroup>
