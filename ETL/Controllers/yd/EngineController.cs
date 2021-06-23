@@ -17,7 +17,7 @@ namespace ETL.Controllers.yd
         }
         [Route("api/EngineShow")]
         [HttpGet]
-        public IActionResult Show(string name4,string name1,string name2)
+        public IActionResult Show(string name4,string name1,int id)
         {
             List<Engine> list = _Engine.GetList();
             if (!string.IsNullOrEmpty(name4))
@@ -28,9 +28,9 @@ namespace ETL.Controllers.yd
             {
                 list = list.Where(m => m.IId.Contains(name1)).ToList();
             }
-            if (!string.IsNullOrEmpty(name2))
+            if (id>0)
             {
-                list = list.Where(m => m.HName.Contains(name2)).ToList();
+                list = list.Where(m => m.Tid.Equals(id)).ToList();
             }
             return Ok(new { code=0,msg="",data=list});
         }
@@ -44,7 +44,7 @@ namespace ETL.Controllers.yd
         }
         [Route("api/EngineFan")]
         [HttpGet]
-        public IActionResult Fan(int id)
+        public IActionResult Fan(string id)
         {
             return Ok(_Engine.TheFill(id));
         }

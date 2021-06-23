@@ -30,7 +30,7 @@ namespace ETL_Repository
 
         public List<Engine> GetList()
         {
-            string str = $"select * from Engine ";
+            string str = $"select * from engine left join tidlxin on tidlxin.tid=engine.tid left join tid1lxin on tid1lxin.tid1=engine.tid1 where 1=1";
             var dt = _Engine.GetDataSet(str).Tables[0];
             var list = _Engine.DataTableToList<Engine>(dt);
             return list;
@@ -38,12 +38,12 @@ namespace ETL_Repository
 
         public int Insert(Engine model)
         {
-            string str = $"insert into Engine values(null,'{model.TName}','{model.Name}',1,'{model.HName}','{model.IId}')";
+            string str = $"insert into Engine values(null,'{model.Tid1}','{model.Name}',1,'{model.Tid}','{model.IId}')";
             return _Engine.ExecuteNonQuery(str);
 
         }
 
-        public Engine TheFill(int id)
+        public Engine TheFill(string id)
         {
             string str = $"select * from Engine where Id='{id}'";
             var dt = _Engine.GetDataSet(str).Tables[0];
@@ -51,9 +51,10 @@ namespace ETL_Repository
             return list[0];
         }
 
+
         public int Update(Engine model)
         {
-            string str = $"update Engine set TName='{model.TName}',Name='{model.Name}',TName1='1',HName='{model.HName}',IId='{model.IId}'where Id={model.Id}";
+            string str = $"update Engine set Tid1='{model.Tid1}',Name='{model.Name}',TName1='1',Tid='{model.Tid}',IId='{model.IId}'where Id={model.Id}";
             return _Engine.ExecuteNonQuery(str);
         }
 

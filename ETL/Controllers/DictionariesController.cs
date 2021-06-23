@@ -54,7 +54,7 @@ namespace ETL.Controllers
         //反填
         [HttpGet]
         [Route("/api/FanDictionaries")]
-        public dictionaries FanDictionaries(int id)
+        public dictionaries FanDictionaries(string id)
         {
             return _idictionariesRepository.TheFill(id);
         }

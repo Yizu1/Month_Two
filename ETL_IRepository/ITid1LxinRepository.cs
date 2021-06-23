@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ETL_Model
+namespace ETL_IRepository
 {
-    public class Tid1Lxin
+    public interface ITid1LxinRepository<T>
     {
-        public int Tid1 { get; set; }
-        public string TName11 { get; set; }
+        List<T> Bang();
     }
 }

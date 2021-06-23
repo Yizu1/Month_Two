@@ -63,6 +63,11 @@ namespace ETL_Repository
             return _dapperHelper.GetList<dictionaries>(sql).FirstOrDefault(x => x.Id == id);
         }
 
+        public dictionaries TheFill(string id)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// 修改字典
         /// </summary>

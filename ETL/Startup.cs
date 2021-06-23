@@ -34,7 +34,8 @@ namespace ETL
             services.AddTransient<SQLServerHelper>();
             services.AddScoped<IEngineRepository<Engine>, EngineRepository>();
             services.AddScoped<ITidLxinRepository<TidLxin>, TidLxinRepository>();
-
+            services.AddScoped<ITid1LxinRepository<Tid1Lxin>, Tid1LxinRepository>();
+            services.AddScoped<IJianCeRepository<JianCe>, JianCeRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
