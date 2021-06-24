@@ -3,7 +3,9 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
+using Newtonsoft.Json;
 
 namespace ETL_Common
 {
@@ -43,7 +45,7 @@ namespace ETL_Common
         /// <returns></returns>
         public T Fant<T>(string sql)
         {
-            using (IDbConnection sc = new MySql.Data.MySqlClient.MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
@@ -130,6 +132,117 @@ namespace ETL_Common
             }
         }
 
+        /// <summary>
+        /// 获取数据_BI数据分析
+        ///</summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static List<T> GetList_BI<T>(string sql, string name, int flag = 1)
+        {
+            try
+            {
+                if (flag != 1)
+                {
+                    string conn = ConfigurationManager.ConnNameSql + name;
+                    using (IDbConnection db = new SqlConnection(conn))
+                    {
+                        return db.Query<T>(sql).ToList();
+                    }
+                }
+                else
+                {
+                    using (IDbConnection db = new MySqlConnection(ConfigurationManager.conn))
+                    {
+                        return db.Query<T>(sql).ToList();
+                    }
+                }
+
+            }
+            catch (Exception ex)
+            {
+                string nn = ex.Message;
+                return null;
+                throw;
+            }
+        }
+
+
+        /// <summary>
+        /// 获取首行首列
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static object Exescalar(string sql)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.conn))
+                {
+                    return db.ExecuteScalar(sql);
+                }
+            }
+            catch (Exception ex)
+            {
+                string nn = ex.Message;
+                return null;
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 根据数据库名称获取其中表数据MySql
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="name">数据库名称</param>
+        /// <returns></returns>
+        public static string GetDataTable(string sql, string name)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.ConnName + name))
+                {
+                    var reader = db.Query(sql);
+
+                    string json = JsonConvert.SerializeObject(reader);
+
+                    return json;
+                }
+            }
+            catch (Exception ex)
+            {
+                string nn = ex.Message;
+                return null;
+                throw;
+            }
+        }
+
+        /// <summary>
+        /// 根据数据库名称获取其中表数据SqlServer
+        /// </summary>
+        /// <param name="sql">sql语句</param>
+        /// <param name="name">数据库名称</param>
+        /// <returns></returns>
+        public static string GetDataTableSql(string sql, string name)
+        {
+            try
+            {
+                using (IDbConnection db = new SqlConnection(ConfigurationManager.ConnNameSql + name))
+                {
+                    var reader = db.Query(sql);
+
+                    string json = JsonConvert.SerializeObject(reader);
+
+                    return json;
+                }
+            }
+            catch (Exception ex)
+            {
+                string nn = ex.Message;
+                return null;
+                throw;
+            }
+        }
         #endregion
 
     }

@@ -70,7 +70,7 @@ namespace ETL_Repository
         /// <returns></returns>
         public int Update(dictionaries model)
         {
-            string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',PName={model.PName},Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
+            string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
             return _dapperHelper.CUD(sql);
         }
     }
