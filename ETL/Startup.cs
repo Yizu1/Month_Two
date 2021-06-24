@@ -1,5 +1,7 @@
 using ETL_Common;
 using ETL_IRepository;
+using ETL_IRepository.IEngine;
+using ETL_Model;
 using ETL_Repository.etl_task_info;
 using ETL_Repository;
 using Microsoft.AspNetCore.Builder;
@@ -29,7 +31,11 @@ namespace ETL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddTransient<SQLServerHelper>();
+            services.AddScoped<IEngineRepository<Engine>, EngineRepository>();
+            services.AddScoped<ITidLxinRepository<TidLxin>, TidLxinRepository>();
+            services.AddScoped<ITid1LxinRepository<Tid1Lxin>, Tid1LxinRepository>();
+            services.AddScoped<IJianCeRepository<JianCe>, JianCeRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -40,7 +46,8 @@ namespace ETL
             services.AddScoped<ETL_Common.DapperHelper>();
             services.AddScoped<DapperHelper>();
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
-            services.AddScoped<IData_AnalysisRepository, DataAnalysisRepository>();
+>>>>>>>>> Temporary merge branch 2
+
 
             // 配置跨域处理，允许所有来源
             services.AddCors(options =>
