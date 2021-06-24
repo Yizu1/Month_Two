@@ -49,9 +49,9 @@ namespace ETL.Controllers.mtl
             {
                 ar = (from x in ar
                       where (
-                            string.IsNullOrEmpty(name) ? true : x.name.Contains(name)
-                            && (zt != -1 ? (int)x.status == (int)zt : true)
-                            && (quanz != 0 ? x.weight == ((weight)quanz) : true)
+                            (string.IsNullOrEmpty(name) ? true : x.name.Contains(name))
+                            && ((zt != -1 ? (int)x.status == (int)zt : true))
+                            && ((quanz != 0 ? x.weight == ((weight)quanz) : true))
                             )
                       select x).ToList();
             }

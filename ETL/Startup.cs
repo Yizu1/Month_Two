@@ -46,6 +46,7 @@ namespace ETL
             services.AddScoped<ETL_Common.DapperHelper>();
             services.AddScoped<DapperHelper>();
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
+            services.AddScoped<IData_AnalysisRepository, DataAnalysisRepository>();
 
 
             // 配置跨域处理，允许所有来源
