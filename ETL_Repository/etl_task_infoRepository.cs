@@ -21,10 +21,10 @@ namespace ETL_Repository.etl_task_info
             return _logger.CUD(sql);
         }
 
-        public List<ETL_Model.etl_task_info> GetList()
+        public IEnumerable<ETL_Model.etl_task_info> GetList()
         {
             String sql = "select * from etl_task_info";
-            return _logger.GetList<ETL_Model.etl_task_info>(sql);
+            return (IEnumerable<ETL_Model.etl_task_info>)_logger.GetList<ETL_Model.etl_task_info>(sql);
         }
 
         public int Insert(ETL_Model.etl_task_info m)
@@ -37,6 +37,11 @@ namespace ETL_Repository.etl_task_info
         {
             string sql = $"select * from etl_task_info where id = '{id}'";
             return _logger.Fant<ETL_Model.etl_task_info>(sql);
+        }
+
+        public ETL_Model.etl_task_info TheFill(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public int Update(ETL_Model.etl_task_info model)

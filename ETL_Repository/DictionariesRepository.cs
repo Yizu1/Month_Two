@@ -35,10 +35,10 @@ namespace ETL_Repository
         /// 显示字典
         /// </summary>
         /// <returns></returns>
-        public List<dictionaries> GetList()
+        public  List<dictionaries> GetList()
         {
             string sql = "select * from dictionaries";
-            return _dapperHelper.GetList<dictionaries>(sql);
+            return  _dapperHelper.GetList<dictionaries>(sql).Result;
         }
 
         /// <summary>
@@ -59,8 +59,8 @@ namespace ETL_Repository
         /// <returns></returns>
         public dictionaries TheFill(string id)
         {
-            string sql = "select * from dictionaries";
-            return _dapperHelper.GetList<dictionaries>(sql).FirstOrDefault(x => x.Id.ToString() == id);
+            string sql = $"select * from dictionaries where Id in({id})";
+            return _dapperHelper.Fant<dictionaries>(sql);
         }
 
         /// <summary>
@@ -72,6 +72,11 @@ namespace ETL_Repository
         {
             string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
             return _dapperHelper.CUD(sql);
+        }
+
+        IEnumerable<dictionaries> IBaseRepository<dictionaries>.GetList()
+        {
+            throw new NotImplementedException();
         }
     }
 }

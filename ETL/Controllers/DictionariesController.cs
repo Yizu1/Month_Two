@@ -26,7 +26,7 @@ namespace ETL.Controllers
         [Route("/api/GetDictionaries")]
         public IActionResult GetDictionaries(int pid=-1)
         {
-            List<dictionaries> list = _idictionariesRepository.GetList();
+            IEnumerable<dictionaries> list = _idictionariesRepository.GetList();
 
             foreach (var s in list)
             {

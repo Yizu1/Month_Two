@@ -8,13 +8,15 @@ using System.Threading.Tasks;
 
 namespace ETL_Common
 {
-    public class ConfigurationManager
+    public static class ConfigurationManager
     {
         public readonly static IConfiguration configuration;
 
         static ConfigurationManager()
         {
             configuration = new ConfigurationBuilder().SetBasePath(Directory.GetCurrentDirectory()).AddJsonFile("appsettings.json", true).Build();
+            var ar =  configuration.GetConnectionString("MySqlConnection");
+           
         }
 
 
@@ -36,4 +38,6 @@ namespace ETL_Common
             get { return configuration.GetConnectionString("MySqlConnectionName"); }
         }
     }
-}
+    }
+    
+

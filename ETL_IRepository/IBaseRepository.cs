@@ -19,7 +19,7 @@ namespace ETL_IRepository
         /// </summary>
         /// <typeparam name="T">Model类型</typeparam>
         /// <returns></returns>
-        List<T> GetList();
+        IEnumerable<T> GetList();
 
 
         /// <summary>

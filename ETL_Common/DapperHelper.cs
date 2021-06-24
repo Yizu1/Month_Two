@@ -6,6 +6,7 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 using Newtonsoft.Json;
+using System.Threading.Tasks;
 
 namespace ETL_Common
 {
@@ -20,7 +21,7 @@ namespace ETL_Common
         /// <returns></returns>
         public T Scalar<T>(string sql)
         {
-            using (IDbConnection sc = new MySql.Data.MySqlClient.MySqlConnection(ConfigurationManager.conn))
+            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
@@ -113,14 +114,14 @@ namespace ETL_Common
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        public List<T> GetList<T>(string sql)
+        public async Task<List<T>> GetList<T>(string sql)
         {
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
-                    var result = sc.Query<T>(sql).ToList();
-                    return result;
+                    var result = await sc.QueryAsync<T>(sql);
+                    return (List<T>)result;
                 }
                 catch (System.Exception ex)
                 {
