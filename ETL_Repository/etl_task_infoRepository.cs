@@ -39,6 +39,11 @@ namespace ETL_Repository.etl_task_info
             return _logger.Fant<ETL_Model.etl_task_info>(sql);
         }
 
+        public ETL_Model.etl_task_info TheFill(int id)
+        {
+            throw new NotImplementedException();
+        }
+
         public int Update(ETL_Model.etl_task_info model)
         {
             string sql = "update etl_task_info set ";
