@@ -14,25 +14,25 @@ namespace ETL_Common
     {
         #region
 
-        public  int ExecuteNonQuery(string sql)
+        public  async Task<int>  ExecuteNonQuery(string sql)
         { 
             using  (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
             {
                 conn.Open();
-                MySqlCommand commd = new MySqlCommand(sql, conn);
-                return  commd.ExecuteNonQuery();
+                MySqlCommand commd =  new MySqlCommand(sql, conn);
+                return await commd.ExecuteNonQueryAsync();
             }
         }
 
         //显示显示操作
-        public DataSet GetDataSet(string sql,int flag=1)
+        public async Task< DataSet> GetDataSet(string sql,int flag=1)
         {
             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
             {
                 conn.Open();
                 MySqlDataAdapter data = new MySqlDataAdapter(sql, conn);
                 var dt = new DataSet();
-                data.Fill(dt);
+                await data.FillAsync(dt);
                 return dt;
             }
         }

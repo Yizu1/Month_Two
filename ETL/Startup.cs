@@ -28,7 +28,7 @@ namespace ETL
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<SQLServerHelper>();
@@ -36,6 +36,7 @@ namespace ETL
             services.AddScoped<ITidLxinRepository<TidLxin>, TidLxinRepository>();
             services.AddScoped<ITid1LxinRepository<Tid1Lxin>, Tid1LxinRepository>();
             services.AddScoped<IJianCeRepository<Jian>, JianCeRepository>();
+            services.AddScoped<IEngineRizhiRepository<engineRizhi>, EngineRizhiRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {

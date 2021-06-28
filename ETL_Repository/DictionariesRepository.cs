@@ -59,8 +59,8 @@ namespace ETL_Repository
         /// <returns></returns>
         public dictionaries TheFill(string id)
         {
-            string sql = "select * from dictionaries";
-            return _dapperHelper.GetList<dictionaries>(sql).FirstOrDefault(x => x.Id.ToString() == id);
+            string sql = $"select * from dictionaries where id ={id} ";
+            return _dapperHelper.Fant<dictionaries>(sql); 
         }
 
         /// <summary>

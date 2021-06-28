@@ -19,7 +19,8 @@ namespace ETL_Repository
         public List<Jian> Show()
         {
             string str = $"select * from etl_task_info";
-            var dt = _Jian.GetDataSet(str).Tables[0];
+            //var dt = _Jian.GetDataSet(str).Tables[0];
+            var dt = _Jian.GetDataSet(str).Result.Tables[0];
             var list = _Jian.DataTableToList<Jian>(dt);
             return list;
 

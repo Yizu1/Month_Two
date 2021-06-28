@@ -115,6 +115,7 @@ namespace ETL_Common
 
         public List<T> GetList<T>(string sql)
         {
+
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try

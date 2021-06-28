@@ -8,7 +8,7 @@ namespace ETL_Model
 {
     public enum weight
     {
-        紧急任务,
+        紧急任务=1,
         高,
         中,
         低
@@ -22,8 +22,8 @@ namespace ETL_Model
     }
     public enum status
     {
-        有错误=0,
-        无错误
+        暂停=0,
+        执行中
     }
     //任务信息表
     public class Jian
@@ -116,6 +116,7 @@ namespace ETL_Model
         /// 创建时间
         /// </summary>
         public DateTime create_time { get; set; }
+        public string create_times { get=>create_time.ToString("F");  }
         /// <summary>
         /// 更新人
         /// </summary>
@@ -124,6 +125,7 @@ namespace ETL_Model
         /// 更新时间
         /// </summary> 
         public DateTime update_time { get; set; }
+        public string update_times { get => update_time.ToString("F"); }
 
     }
 }

@@ -10,52 +10,69 @@ using System.Threading.Tasks;
 
 namespace ETL_Repository
 {
+    
     public class EngineRepository : IEngineRepository<Engine>
     {
+        //实例化redis缓存帮助类
+        RedisHelper<Engine> dh = new RedisHelper<Engine>();
+        string dataredisKey;
+        List<Engine> listd = new List<Engine>();
         private readonly SQLServerHelper _Engine;
         public EngineRepository(SQLServerHelper Engine)
         {
             _Engine = Engine;
+            dataredisKey = "Engine";
+            listd = dh.GetList(dataredisKey);
+        }
+
+        public async Task<int> Delete(string ids)
+        {
+            string str = $"delete from Engine where Id in ({ids})";
+            var aa =await Task.FromResult( _Engine.ExecuteNonQuery(str));
+            return aa.Result;
+        }
+
+        public async Task< List<Engine>> GetList() 
+        {
+            if (listd==null&&listd.Count==0)
+            {
+                 string str = $"select * from engine left join tidlxin on tidlxin.tid=engine.tid left join tid1lxin on tid1lxin.tid1=engine.tid1 where 1=1";
+                            var dt =await Task.FromResult( _Engine.GetDataSet(str).Result.Tables[0]);
+                            var list = _Engine.DataTableToList<Engine>(dt);
+                            return list;
+                dh.SetList(list, dataredisKey);
+            }
+            else
+            {
+                return listd;
+            }
+           
+        }
+
+        public async Task<int>  Insert(Engine model)
+        {
+            string str = $"insert into Engine values(null,'{model.Tid1}','{model.Name}',1,'{model.Tid}','{model.IId}')";
+            var aa=await Task.FromResult( _Engine.ExecuteNonQuery(str));
+            return aa.Result;
+
         }
 
         
 
-        public int Delete(string ids)
-        {
-            string str = $"delete from Engine where Id in ({ids})";
-            return _Engine.ExecuteNonQuery(str);
-
-
-        }
-
-        public List<Engine> GetList()
-        {
-            string str = $"select * from engine left join tidlxin on tidlxin.tid=engine.tid left join tid1lxin on tid1lxin.tid1=engine.tid1 where 1=1";
-            var dt = _Engine.GetDataSet(str).Tables[0];
-            var list = _Engine.DataTableToList<Engine>(dt);
-            return list;
-        }
-
-        public int Insert(Engine model)
-        {
-            string str = $"insert into Engine values(null,'{model.Tid1}','{model.Name}',1,'{model.Tid}','{model.IId}')";
-            return _Engine.ExecuteNonQuery(str);
-
-        }
-
-        public Engine TheFill(string id)
+        public async Task<Engine>  TheFill(string id)
         {
             string str = $"select * from Engine where Id='{id}'";
-            var dt = _Engine.GetDataSet(str).Tables[0];
+            var dt =await Task.FromResult(  _Engine.GetDataSet(str).Result.Tables[0]);
             var list = _Engine.DataTableToList<Engine>(dt);
             return list[0];
         }
 
 
-        public int Update(Engine model)
+        public async Task<int> Update(Engine model)
         {
             string str = $"update Engine set Tid1='{model.Tid1}',Name='{model.Name}',TName1='1',Tid='{model.Tid}',IId='{model.IId}'where Id={model.Id}";
-            return _Engine.ExecuteNonQuery(str);
+            var aa=await Task.FromResult( _Engine.ExecuteNonQuery(str));
+            return aa.Result;
         }
 
         

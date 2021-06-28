@@ -27,7 +27,6 @@ namespace ETL.Controllers
         public IActionResult GetDictionaries(int pid=-1)
         {
             List<dictionaries> list = _idictionariesRepository.GetList();
-
             foreach (var s in list)
             {
                 s.hasChildren = list.Where(x => x.PName == s.Id).Count() > 0;
@@ -37,7 +36,6 @@ namespace ETL.Controllers
             {
                 list = list.Where(x => pid != -1 ? x.PName == pid : true).ToList();
             }
-
             return Ok(new
             {
                 msg = "所有数据",

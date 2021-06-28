@@ -29,7 +29,7 @@ namespace ETL_Repository.etl_task_info
 
         public int Insert(ETL_Model.Jian m)
         {
-            string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','',null)";
+            string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{(int)m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','',{DateTime.Now})";
             return _logger.CUD(sql,m);
         }
 
