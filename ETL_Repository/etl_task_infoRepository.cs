@@ -21,30 +21,30 @@ namespace ETL_Repository.etl_task_info
             return _logger.CUD(sql);
         }
 
-        public List<ETL_Model.etl_task_info> GetList()
+        public List<ETL_Model.Jian> GetList()
         {
             String sql = "select * from etl_task_info";
-            return _logger.GetList<ETL_Model.etl_task_info>(sql);
+            return _logger.GetList<ETL_Model.Jian>(sql);
         }
 
-        public int Insert(ETL_Model.etl_task_info m)
+        public int Insert(ETL_Model.Jian m)
         {
             string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','',null)";
             return _logger.CUD(sql,m);
         }
 
-        public ETL_Model.etl_task_info TheFill(string id)
+        public ETL_Model.Jian TheFill(string id)
         {
             string sql = $"select * from etl_task_info where id = '{id}'";
-            return _logger.Fant<ETL_Model.etl_task_info>(sql);
+            return _logger.Fant<ETL_Model.Jian>(sql);
         }
 
-        public ETL_Model.etl_task_info TheFill(int id)
+        public ETL_Model.Jian TheFill(int id)
         {
             throw new NotImplementedException();
         }
 
-        public int Update(ETL_Model.etl_task_info model)
+        public int Update(ETL_Model.Jian model)
         {
             string sql = "update etl_task_info set ";
             return _logger.CUD(sql);

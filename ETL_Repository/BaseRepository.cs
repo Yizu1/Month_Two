@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace ETL_Repository
 {
 
-    public  class BaseRepository<T>
+    public  class BaseRepository
     {
 
 

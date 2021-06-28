@@ -26,7 +26,7 @@ namespace ETL.Controllers.mtl
         /// <param name="a"></param>
         /// <returns></returns>
         [HttpPost("/api/task_info/insert")]
-        public IActionResult insert(ETL_Model.etl_task_info a)
+        public IActionResult insert(ETL_Model.Jian a)
         {
             int n = _task.Insert(a);
 

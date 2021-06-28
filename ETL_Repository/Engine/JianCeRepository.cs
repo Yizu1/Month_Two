@@ -9,20 +9,21 @@ using System.Threading.Tasks;
 
 namespace ETL_Repository
 {
-    public class JianCeRepository : IJianCeRepository<JianCe>
+    public class JianCeRepository : IJianCeRepository<Jian>
     {
-        private readonly SQLServerHelper _JianCe;
-        public JianCeRepository(SQLServerHelper JianCe)
+        private readonly SQLServerHelper _Jian;
+        public JianCeRepository(SQLServerHelper Jian)
         {
-            _JianCe = JianCe;
+            _Jian = Jian;
         }
-        public List<JianCe> Show()
+        public List<Jian> Show()
         {
-            string str = $"select * from JianCe";
-            var dt = _JianCe.GetDataSet(str).Tables[0];
-            var list = _JianCe.DataTableToList<JianCe>(dt);
+            string str = $"select * from etl_task_info";
+            var dt = _Jian.GetDataSet(str).Tables[0];
+            var list = _Jian.DataTableToList<Jian>(dt);
             return list;
 
         }
+
     }
 }

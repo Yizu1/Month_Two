@@ -14,18 +14,18 @@ namespace ETL_Common
     {
         #region
 
-        public int ExecuteNonQuery(string sql)
-        {
-            using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
+        public  int ExecuteNonQuery(string sql)
+        { 
+            using  (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
             {
                 conn.Open();
                 MySqlCommand commd = new MySqlCommand(sql, conn);
-                return commd.ExecuteNonQuery();
+                return  commd.ExecuteNonQuery();
             }
         }
 
         //显示显示操作
-        public DataSet GetDataSet(string sql)
+        public DataSet GetDataSet(string sql,int flag=1)
         {
             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
             {

@@ -35,7 +35,7 @@ namespace ETL
             services.AddScoped<IEngineRepository<Engine>, EngineRepository>();
             services.AddScoped<ITidLxinRepository<TidLxin>, TidLxinRepository>();
             services.AddScoped<ITid1LxinRepository<Tid1Lxin>, Tid1LxinRepository>();
-            services.AddScoped<IJianCeRepository<JianCe>, JianCeRepository>();
+            services.AddScoped<IJianCeRepository<Jian>, JianCeRepository>();
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -46,7 +46,7 @@ namespace ETL
             services.AddScoped<ETL_Common.DapperHelper>();
             services.AddScoped<DapperHelper>();
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
-
+            services.AddScoped<IData_AnalysisRepository, DataAnalysisRepository>();
 
             // 配置跨域处理，允许所有来源
             services.AddCors(options =>

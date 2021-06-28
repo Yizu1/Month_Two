@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ETL_Model;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -28,13 +29,13 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="databasename">数据库名称</param>
         /// <returns></returns>
-        List<ETL_Model.GetTables> GetTableName(string databasename, int flag);
+        List<GetTables> GetTableName(string databasename, int flag);
 
         /// <summary>
         /// 获取数据库名 
         /// </summary>
         /// <returns></returns>
-        List<ETL_Model.GetDataBases> GetDatabaseName(int flag);
+        List<GetDataBases> GetDatabaseName(int flag);
 
         /// <summary>
         /// SQL语句耗时

@@ -17,50 +17,54 @@ namespace ETL.Controllers.yd
         } 
         [Route("api/EngineShow")]
         [HttpGet]
-        public IActionResult Show(string name4,string name1,int id)
+        public async Task<List<Engine>>  Show(string name4,string name1,int id)
         {
-            List<Engine> list = _Engine.GetList();
-            if (!string.IsNullOrEmpty(name4))
-            {
-                list = list.Where(m=>m.Name.Contains(name4)).ToList();
-            }
-            if (!string.IsNullOrEmpty(name1))
-            {
-                list = list.Where(m => m.IId.Contains(name1)).ToList();
-            }
-            if (id>0)
-            {
-                list = list.Where(m => m.Tid.Equals(id)).ToList();
-            }
-            return Ok(new { code=0,msg="",data=list});
+           
+                 List<Engine> list =  _Engine.GetList();
+                if (!string.IsNullOrEmpty(name4))
+                {
+                    list = list.Where(m => m.Name.Contains(name4)).ToList();
+                }
+                if (!string.IsNullOrEmpty(name1))
+                {
+                    list = list.Where(m => m.IId.Contains(name1)).ToList();
+                }
+                if (id > 0)
+                {
+                    list = list.Where(m => m.Tid.Equals(id)).ToList();
+                }
+                return list ;
+           
+            
         }
         [Route("api/EngineDel")]
         [HttpPost]
-        public IActionResult Del(string ids)
+        public async Task<int> Del(string ids)
         {
             ids = ids.TrimEnd(',');
             var  list = _Engine.Delete(ids);
-            return Ok(list);
+            return list;
         }
         [Route("api/EngineFan")]
         [HttpGet]
-        public IActionResult Fan(string id)
+        public async Task<Engine> Fan(string id)
         {
-            return Ok(_Engine.TheFill(id));
+            Engine list = _Engine.TheFill(id);
+            return list;
         }
         [Route("/api/EngineAdd")]
         [HttpPost]
-        public IActionResult Add(Engine i)
+        public async Task<int> Add(Engine i)
         {
             int h = _Engine.Insert(i);
-            return Ok(new { sate = h > 0 ? true : false, msg = h > 0 ? "操作成功" : "操作失败" });
+            return h;
         }
         [Route("/api/EngineUpd")]
         [HttpPost]
-        public IActionResult Upd(Engine i)
+        public async Task<int> Upd(Engine i)
         {
             int h = _Engine.Update(i);
-            return Ok(new { sate = h > 0 ? true : false, msg = h > 0 ? "操作成功" : "操作失败" });
+            return h;
         }
     }
 }

@@ -26,7 +26,7 @@ namespace ETL_Model
         无错误
     }
     //任务信息表
-    public class etl_task_info
+    public class Jian
     {
         public string id { get; set; }
         /// <summary>

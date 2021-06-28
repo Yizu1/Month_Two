@@ -24,9 +24,20 @@ namespace ETL.Controllers
         //显示
         [HttpGet]
         [Route("/api/GetDictionaries")]
-        public IActionResult GetDictionaries()
+        public IActionResult GetDictionaries(int pid=-1)
         {
             List<dictionaries> list = _idictionariesRepository.GetList();
+
+            foreach (var s in list)
+            {
+                s.hasChildren = list.Where(x => x.PName == s.Id).Count() > 0;
+            }
+
+            if (pid != -1)
+            {
+                list = list.Where(x => pid != -1 ? x.PName == pid : true).ToList();
+            }
+
             return Ok(new
             {
                 msg = "所有数据",

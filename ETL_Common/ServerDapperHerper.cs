@@ -112,7 +112,6 @@ namespace ETL_Common
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-
         public List<T> GetList<T>(string sql)
         {
             using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))

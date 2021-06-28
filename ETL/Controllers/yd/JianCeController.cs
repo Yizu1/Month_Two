@@ -10,16 +10,16 @@ namespace ETL.Controllers.yd
 {
     public class JianCeController : Controller
     {
-        private readonly IJianCeRepository<JianCe> _JianCe;
-        public JianCeController(IJianCeRepository<JianCe> JianCe)
+        private readonly IJianCeRepository<Jian> _Jian;
+        public JianCeController(IJianCeRepository<Jian> Jian)
         {
-            _JianCe = JianCe;
+            _Jian = Jian;
         }
         [Route("api/JianCeShow")]
         [HttpGet]
         public IActionResult Show()
         {
-            List<JianCe> list = _JianCe.Show();
+            List<Jian> list = _Jian.Show();
             return Ok(new { code=0,msg="",data=list});
         }
     }
