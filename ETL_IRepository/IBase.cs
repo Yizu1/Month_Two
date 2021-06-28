@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ETL_IRepository
 {
-    public interface IBaseRepository<T>
+    public interface IBase<T>
     {
 
         /// <summary>
@@ -12,7 +11,7 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="model">Model类型的别名</param>
         /// <returns></returns>
-        Task<int> Insert(T model);
+        int Insert(T model);
 
 
         /// <summary>
@@ -20,7 +19,7 @@ namespace ETL_IRepository
         /// </summary>
         /// <typeparam name="T">Model类型</typeparam>
         /// <returns></returns>
-        Task<List<T>> GetList();
+        List<T> GetList();
 
 
         /// <summary>
@@ -28,7 +27,7 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="ids">主键Id</param>
         /// <returns></returns>
-        Task<int> Delete(string ids);
+        int Delete(string ids);
 
 
         /// <summary>
@@ -36,7 +35,7 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="model">Model类型的别名</param>
         /// <returns></returns>
-        Task<int> Update(T model);
+        int Update(T model);
 
 
         /// <summary>
@@ -44,6 +43,6 @@ namespace ETL_IRepository
         /// </summary>
         /// <param name="id">主键Id</param>
         /// <returns></returns>
-       Task <T> TheFill(string id);
+        T TheFill(string id);
     }
 }

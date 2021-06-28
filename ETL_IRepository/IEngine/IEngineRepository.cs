@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETL_IRepository.IEngine
 {
-    public interface IEngineRepository<T> : IBaseRepository<T>
+    public interface IEngineRepository<T> : IBase<T>
     {
         
     }

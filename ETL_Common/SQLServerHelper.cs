@@ -16,6 +16,7 @@ namespace ETL_Common
 
         public int ExecuteNonQuery(string sql)
         {
+
             using (MySqlConnection conn = new MySqlConnection(ConfigurationManager.conn))
             {
                 conn.Open();

@@ -28,7 +28,7 @@ namespace ETL
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<SQLServerHelper>();
@@ -48,10 +48,29 @@ namespace ETL
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
             services.AddScoped<IData_AnalysisRepository, DataAnalysisRepository>();
 
+
             // 配置跨域处理，允许所有来源
             services.AddCors(options =>
             options.AddPolicy("cors",
             p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin()));
+
+            ////配置跨域处理，允许所有来源
+            services.AddCors(options => options.AddPolicy("cors", p => p.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()));
+            ////1.配置跨域处理，允许所有来源： 
+            //services.AddCors(options =>
+            //    options.AddPolicy("自定义的跨域策略名称", p => p.AllowAnyOrigin())
+            //);
+            //  //添加cors 服务 配置跨域处理   
+            services.AddCors(options =>
+            {
+                options.AddPolicy("any", builder =>
+                {
+                    builder.WithMethods("GET", "POST", "HEAD", "PUT", "DELETE", "OPTIONS")
+                    //.AllowCredentials()//指定处理cookie
+                .AllowAnyOrigin(); //允许任何来源的主机访问
+                });
+            });
+
 
         }
 
@@ -65,8 +84,9 @@ namespace ETL
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "ETL v1"));
             }
 
-            //启动跨域
+            ////启动跨域
             app.UseCors("cors");
+
 
             app.UseRouting();
 
@@ -75,6 +95,10 @@ namespace ETL
             {
                 endpoints.MapControllers();
             });
+
+
+            //配置Cors
+            app.UseCors("any");
         }
     }
 }
