@@ -58,6 +58,9 @@ namespace ETL_Repository
             return _Engine.ExecuteNonQuery(str);
         }
 
-        
+        List<Engine> IBase<Engine>.GetList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

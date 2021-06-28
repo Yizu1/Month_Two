@@ -114,7 +114,6 @@ namespace ETL_Common
         /// <param name="sql"></param>
         /// <returns></returns>
 
-        public async Task<List<T>> GetList<T>(string sql)
         public static async Task<List<T>> GetList<T>(string sql)
         {
 
@@ -134,7 +133,7 @@ namespace ETL_Common
                 }
             }
         } 
-        public IEnumerable<T> GetList<T>(string sql,string yb)
+        public async Task<IEnumerable<T>> GetListAsync<T>(string sql,string yb)
         {
 
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
@@ -143,9 +142,6 @@ namespace ETL_Common
                 {
                     var result = await sc.QueryAsync<T>(sql);
                     return (List<T>)result;
-
-                    IEnumerable<T> result = (IEnumerable<T>)sc.QueryAsync<T>(sql);
-                    return result;
                 }
                 catch (System.Exception ex)
                 {

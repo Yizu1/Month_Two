@@ -24,10 +24,9 @@ namespace ETL.Controllers
         //显示
         [HttpGet]
         [Route("/api/GetDictionaries")]
-        public IActionResult GetDictionaries(int pid=-1)
+        public async Task<List<dictionaries>> GetDictionaries(int pid=-1)
         {
-            IEnumerable<dictionaries> list = _idictionariesRepository.GetList();
-
+            List<dictionaries> list = await _idictionariesRepository.GetList();
             foreach (var s in list)
             {
                 s.hasChildren = list.Where(x => x.PName == s.Id).Count() > 0;
@@ -37,45 +36,39 @@ namespace ETL.Controllers
             {
                 list = list.Where(x => pid != -1 ? x.PName == pid : true).ToList();
             }
-
-            return Ok(new
-            {
-                msg = "所有数据",
-                code = 0,
-                data = list
-            });
+            return list;
         }
 
         //新增
         [HttpPost]
         [Route("/api/AddDictionaries")]
-        public int AddDictionaries(dictionaries model)
+        public async Task<int> AddDictionaries(dictionaries model)
         {
-            return _idictionariesRepository.Insert(model);
+            return await _idictionariesRepository.Insert(model);
         }
 
         //删除
         [HttpPost]
         [Route("/api/DelDictionaries")]
-        public int DelDictionaries(string id)
+        public async Task<int> DelDictionaries(string id)
         {
-            return _idictionariesRepository.Delete(id);
+            return await _idictionariesRepository.Delete(id);
         }
 
         //反填
         [HttpGet]
         [Route("/api/FanDictionaries")]
-        public dictionaries FanDictionaries(string id)
+        public async Task< dictionaries> FanDictionaries(string id)
         {
-            return _idictionariesRepository.TheFill(id);
+            return await _idictionariesRepository.TheFill(id);
         }
 
         //修改
         [HttpPut]
         [Route("/api/UpdateDictionaries")]
-        public int UpdateDictionaries(dictionaries model)
+        public async Task< int> UpdateDictionaries(dictionaries model)
         {
-            return _idictionariesRepository.Update(model);
+            return await _idictionariesRepository.Update(model);
         }
     }
 }

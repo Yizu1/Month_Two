@@ -25,20 +25,20 @@ namespace ETL_Repository
         /// </summary>
         /// <param name="ids"></param>
         /// <returns></returns>
-        public int Delete(string ids)
+        public async Task<int> Delete(string ids)
         {
             string sql = $"DELETE from dictionaries WHERE Id in({ids})";
-            return _dapperHelper.CUD(sql);
+            return await _dapperHelper.CUD(sql);
         }
 
         /// <summary>
         /// 显示字典
         /// </summary>
         /// <returns></returns>
-        public  List<dictionaries> GetList()
+        public async Task< List<dictionaries>> GetList()
         {
             string sql = "select * from dictionaries";
-            return  _dapperHelper.GetList<dictionaries>(sql).Result;
+            return await DapperHelper.GetList<dictionaries>(sql);
         }
 
         /// <summary>
@@ -46,10 +46,10 @@ namespace ETL_Repository
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public int Insert(dictionaries model)
+        public async Task< int> Insert(dictionaries model)
         {
             string sql = $"insert into dictionaries VALUES(NULL,N'{model.Coding}','{model.Name}',{model.PName},{model.Property},{model.States},{model.Sort},'{model.Remark}')";
-            return _dapperHelper.CUD(sql);
+            return await _dapperHelper.CUD(sql);
         }
 
         /// <summary>
@@ -57,10 +57,10 @@ namespace ETL_Repository
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public dictionaries TheFill(string id)
+        public async Task< dictionaries> TheFill(string id)
         {
-            string sql = $"select * from dictionaries where Id in({id})";
-            return _dapperHelper.Fant<dictionaries>(sql);
+            string sql = $"select * from dictionaries where Id ={id} ";
+            return await _dapperHelper.Fant<dictionaries>(sql); 
         }
 
         /// <summary>
@@ -68,15 +68,10 @@ namespace ETL_Repository
         /// </summary>
         /// <param name="model"></param>
         /// <returns></returns>
-        public int Update(dictionaries model)
+        public async Task< int> Update(dictionaries model)
         {
             string sql = $"UPDATE dictionaries SET Coding='{model.Coding}',Name='{model.Name}',Property={model.Property},States={model.States},Sort={model.Sort},Remark='{model.Remark}' where Id={model.Id}";
-            return _dapperHelper.CUD(sql);
-        }
-
-        IEnumerable<dictionaries> IBaseRepository<dictionaries>.GetList()
-        {
-            throw new NotImplementedException();
+            return await _dapperHelper.CUD(sql);
         }
     }
 }
