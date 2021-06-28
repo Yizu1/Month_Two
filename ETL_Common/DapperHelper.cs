@@ -44,13 +44,13 @@ namespace ETL_Common
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public T Fant<T>(string sql)
+        public async Task< T> Fant<T>(string sql)
         {
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
-                    var result = sc.QueryFirst<T>(sql);
+                    var result = await sc.QueryFirstAsync<T>(sql);
                     return result;
 
                 }
@@ -68,14 +68,14 @@ namespace ETL_Common
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public int CUD(string sql)
+        public async Task<int> CUD(string sql)
         {
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
                     sc.Open();
-                    return sc.Execute(sql);
+                    return await sc.ExecuteAsync(sql);
                 }
                 catch (System.Exception ex)
                 {
@@ -115,13 +115,37 @@ namespace ETL_Common
         /// <returns></returns>
 
         public async Task<List<T>> GetList<T>(string sql)
+        public static async Task<List<T>> GetList<T>(string sql)
         {
+
+            using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
+            {
+                try
+                {
+                    IEnumerable<T> result =await sc.QueryAsync<T>(sql);
+
+                    return (List<T>)result;
+                }
+                catch (Exception ex)
+                {
+                    string nn = ex.Message;
+                    return null;
+                    throw;
+                }
+            }
+        } 
+        public IEnumerable<T> GetList<T>(string sql,string yb)
+        {
+
             using (IDbConnection sc = new MySqlConnection(ConfigurationManager.conn))
             {
                 try
                 {
                     var result = await sc.QueryAsync<T>(sql);
                     return (List<T>)result;
+
+                    IEnumerable<T> result = (IEnumerable<T>)sc.QueryAsync<T>(sql);
+                    return result;
                 }
                 catch (System.Exception ex)
                 {
