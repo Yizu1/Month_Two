@@ -26,7 +26,7 @@ namespace ETL_Model
         执行中
     }
     //任务信息表
-    public class Jian
+    public class etl_task_info
     {
         public string id { get; set; }
         /// <summary>
@@ -44,7 +44,7 @@ namespace ETL_Model
         public process_status process_status { get; set; }
         public string process_statuss { get=>process_status.ToString();   }
         /// <summary>
-        /// 任务状态 1无错误0有错误
+        /// 任务状态 1执行中0暂停
         /// </summary>
         public status status { get; set; }
         public string statuss { get=>status.ToString();  }

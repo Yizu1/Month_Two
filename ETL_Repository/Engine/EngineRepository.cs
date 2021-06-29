@@ -34,21 +34,16 @@ namespace ETL_Repository
 
         public async Task< List<Engine>> GetList() 
         {
-            if (listd==null&&listd.Count==0)
-            {
+           
                  string str = $"select * from engine left join tidlxin on tidlxin.tid=engine.tid left join tid1lxin on tid1lxin.tid1=engine.tid1 where 1=1";
                             var dt =await Task.FromResult( _Engine.GetDataSet(str).Result.Tables[0]);
                             var list = _Engine.DataTableToList<Engine>(dt);
                             return list;
-                dh.SetList(list, dataredisKey);
-            }
-            else
-            {
-                return listd;
-            }
+                
+          
            
         }
-
+        
         public async Task<int>  Insert(Engine model)
         {
             string str = $"insert into Engine values(null,'{model.Tid1}','{model.Name}',1,'{model.Tid}','{model.IId}')";

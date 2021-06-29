@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ETL_IRepository.IEngine
 {
-    public interface IEngineRepository<T> 
+    public interface IEngineRepository<T>
     {
         /// <summary>
         /// 添加
@@ -22,13 +22,13 @@ namespace ETL_IRepository.IEngine
         /// <returns></returns>
         Task<  List<T> >GetList();
 
-
+        
         /// <summary>
         /// 删除、批删
         /// </summary>
         /// <param name="ids">主键Id</param>
         /// <returns></returns>
-      Task<  int> Delete(string ids);
+        Task<  int> Delete(string ids);
 
 
         /// <summary>

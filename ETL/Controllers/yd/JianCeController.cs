@@ -10,8 +10,8 @@ namespace ETL.Controllers.yd
 {
     public class JianCeController : Controller
     {
-        private readonly IJianCeRepository<Jian> _Jian;
-        public JianCeController(IJianCeRepository<Jian> Jian)
+        private readonly IJianCeRepository<etl_task_info> _Jian;
+        public JianCeController(IJianCeRepository<etl_task_info> Jian)
         {
             _Jian = Jian;
         }
@@ -19,7 +19,7 @@ namespace ETL.Controllers.yd
         [HttpGet]
         public IActionResult Show()
         {
-            List<Jian> list = _Jian.Show();
+            List<etl_task_info> list = _Jian.Show();
             return Ok(new { code=0,msg="",data=list});
         }
     }

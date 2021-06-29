@@ -43,14 +43,14 @@ namespace ETL_Common
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public T Fant<T>(string sql)
+        public async Task< T> Fant<T>(string sql)
         {
             using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
-                    var result = sc.QueryFirst<T>(sql);
-                    return result;
+                    var result = sc.QueryFirstAsync<T>(sql);
+                    return result.Result;
 
                 }
                 catch (System.Exception ex)
@@ -62,19 +62,19 @@ namespace ETL_Common
             }
         }
 
-        /// <summary>
+        /// <summary> 
         /// 增删改
         /// </summary>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public int CUD(string sql)
+        public async Task<int> CUD(string sql)
         {
             using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
                     sc.Open();
-                    return sc.Execute(sql);
+                    return await sc.ExecuteAsync(sql);
                 }
                 catch (System.Exception ex)
                 {
@@ -89,14 +89,14 @@ namespace ETL_Common
         /// </summary>
         /// <param name="Sql"></param>
         /// <returns></returns>
-        public int CUD<T>(string sql, T I)
+        public async Task<int> CUD<T>(string sql, T I)
         {
             using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 sc.Open();
                 try
                 {
-                    return sc.Execute(sql, I);
+                    return await sc.ExecuteAsync(sql, I);
                 }
                 catch (System.Exception ex)
                 {
@@ -112,14 +112,14 @@ namespace ETL_Common
         /// <typeparam name="T"></typeparam>
         /// <param name="sql"></param>
         /// <returns></returns>
-        public List<T> GetList<T>(string sql)
+        public async Task<List<T>> GetList<T>(string sql)
         {
             using (IDbConnection sc = new SqlConnection(ConfigurationManager.serverconn))
             {
                 try
                 {
-                    var result = sc.Query<T>(sql).ToList();
-                    return result;
+                    IEnumerable<T> result =await sc.QueryAsync<T>(sql);
+                    return (List<T>)result;
                 }
                 catch (System.Exception ex)
                 {
