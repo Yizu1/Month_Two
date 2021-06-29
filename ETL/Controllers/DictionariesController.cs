@@ -26,7 +26,7 @@ namespace ETL.Controllers
         [Route("/api/GetDictionaries")]
         public IActionResult GetDictionaries(int pid=-1)
         {
-            List<dictionaries> list = _idictionariesRepository.GetList();
+            List<dictionaries> list = _idictionariesRepository.GetList().Result;
             foreach (var s in list)
             {
                 s.hasChildren = list.Where(x => x.PName == s.Id).Count() > 0;
@@ -47,33 +47,33 @@ namespace ETL.Controllers
         //新增
         [HttpPost]
         [Route("/api/AddDictionaries")]
-        public int AddDictionaries(dictionaries model)
+        public async Task< int> AddDictionaries(dictionaries model)
         {
-            return _idictionariesRepository.Insert(model);
+            return await _idictionariesRepository.Insert(model);
         }
 
         //删除
         [HttpPost]
         [Route("/api/DelDictionaries")]
-        public int DelDictionaries(string id)
+        public async Task<int> DelDictionaries(string id)
         {
-            return _idictionariesRepository.Delete(id);
+            return await _idictionariesRepository.Delete(id);
         }
 
         //反填
         [HttpGet]
         [Route("/api/FanDictionaries")]
-        public dictionaries FanDictionaries(string id)
+        public async Task< dictionaries> FanDictionaries(string id)
         {
-            return _idictionariesRepository.TheFill(id);
+            return await _idictionariesRepository.TheFill(id);
         }
 
         //修改
         [HttpPut]
         [Route("/api/UpdateDictionaries")]
-        public int UpdateDictionaries(dictionaries model)
+        public async Task< int> UpdateDictionaries(dictionaries model)
         {
-            return _idictionariesRepository.Update(model);
+            return await _idictionariesRepository.Update(model);
         }
     }
 }

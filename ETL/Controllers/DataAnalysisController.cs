@@ -35,7 +35,7 @@ namespace ETL.Controllers
         //数据库树         public async Task<string>  DatabaseTree()
         [Route("/api/DatabaseTree")]
         [HttpGet]
-        public async Task<string> DatabaseTree()
+        public async  Task<string>  DatabaseTree()
         {
             try
             {
@@ -129,7 +129,7 @@ namespace ETL.Controllers
         /// <returns></returns>
         [Route("/api/SqlGetJson")]
         [HttpGet]
-        public async Task<string> SqlGetJson(string sql, string name, int flag)
+        public string SqlGetJson(string sql, string name, int flag)
         {
             try
             {

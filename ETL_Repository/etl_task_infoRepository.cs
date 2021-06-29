@@ -15,28 +15,28 @@ namespace ETL_Repository.etl_task_info
             _logger = logger;
         }
 
-        public int Delete(string ids)
+        public async Task< int> Delete(string ids)
         {
-            string sql = $"delete from etl_task_info where id in({ids})";
-            return _logger.CUD(sql);
+            string sql = $"delete from etl_task_info where id ='{ids})'";
+            return await _logger.CUD(sql);
         }
 
-        public List<ETL_Model.Jian> GetList()
+        public async Task< List<ETL_Model.etl_task_info>> GetList()
         {
             String sql = "select * from etl_task_info";
-            return _logger.GetList<ETL_Model.Jian>(sql);
+            return await ETL_Common.DapperHelper.GetList<ETL_Model.etl_task_info>(sql);
         }
 
-        public int Insert(ETL_Model.Jian m)
+        public async Task< int> Insert(ETL_Model.etl_task_info m)
         {
-            string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{(int)m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','',{DateTime.Now})";
-            return _logger.CUD(sql,m);
+            string sql = $"insert into etl_task_info  values(uuid(),'{m.name}','{(int)m.weight}','1','0','0','0','0.00','0','0','0',0,0,0,0,0,0,0,'json',0,'{m.create_by}','{DateTime.Now}','','{DateTime.Now}')";
+            return  await _logger.CUD(sql); 
         }
 
-        public ETL_Model.Jian TheFill(string id)
+        public async Task<ETL_Model.etl_task_info> TheFill(string id)
         {
-            string sql = $"select * from etl_task_info where id = '{id}'";
-            return _logger.Fant<ETL_Model.Jian>(sql);
+            string sql = $"select * from etl_task_info where id = {id}";
+            return await _logger.Fant<ETL_Model.etl_task_info>(sql);
         }
 
         public ETL_Model.Jian TheFill(int id)
@@ -44,10 +44,16 @@ namespace ETL_Repository.etl_task_info
             throw new NotImplementedException();
         }
 
-        public int Update(ETL_Model.Jian model)
+        public async Task<int> Update(ETL_Model.etl_task_info model)
         {
-            string sql = "update etl_task_info set ";
-            return _logger.CUD(sql);
+            string sql = $"update etl_task_info set status =1 where id = '{model.id}'";
+            return await _logger.CUD(sql);
+        }
+
+        public async Task< int> Upt(string id)
+        {
+            string sql = $"update etl_task_info set status =1 where id = '{id}'";
+            return await _logger.CUD(sql);
         }
     }
 }

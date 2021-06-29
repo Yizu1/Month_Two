@@ -13,33 +13,33 @@ namespace ETL_Repository
         ETL_Common.DapperHelper dh = new ETL_Common.DapperHelper();
         public int Delete(string ids)
         {
-            return  dh.CUD(ids);
+            return  dh.CUD(ids).Result;
             //throw new NotImplementedException();
         }
 
         public List<T> GetList(string sql)
         {
-           return  dh.GetList<T>(sql);
+           return ETL_Common.DapperHelper.GetList<T>(sql).Result;
             //throw new NotImplementedException();
         }
 
         public int Insert(string sql)
         {
 
-            return dh.CUD(sql);
+            return dh.CUD(sql).Result;
             throw new NotImplementedException();
         }
 
         public T TheFill(string sql)
         {
-            return dh.Fant<T>(sql);
+            return dh.Fant<T>(sql).Result;
 
             //throw new NotImplementedException();
         }
 
         public int Update(string sql)
         {
-            return dh.CUD(sql);
+            return dh.CUD(sql).Result;
             //throw new NotImplementedException();
         }
     }
