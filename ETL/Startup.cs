@@ -16,6 +16,20 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using ETL_IRepository.User;
+using ETL_Repository.User;
+using ETL_IRepository.role;
+using ETL_Repository.role;
+using ETL_IRepository.sys_role;
+using ETL_IRepository.sys_modules;
+using ETL_IRepository.sysy_user_role;
+using ETL_IRepository.sys_role_modules;
+using ETL_Repository.sys_role;
+using ETL_Repository.sys_modules;
+using ETL_Repository.sys_role_modules;
+using ETL_Repository.sys_user_role;
+using ETL_IRepository.sys_user;
+using ETL_Repository.sys_user;
 
 namespace ETL
 {
@@ -47,6 +61,15 @@ namespace ETL
             services.AddScoped<DapperHelper>();
             services.AddScoped<IdictionariesRepository, DictionariesRepository>();
             services.AddScoped<IData_AnalysisRepository, DataAnalysisRepository>();
+            services.AddTransient<DapperHelper, DapperHelper>();
+            services.AddSingleton<IUserRepository, UserRepository>();
+            services.AddSingleton<IRoleRepository, RoleRepository>();
+
+            services.AddScoped<Isys_roleRepository, sys_roleRepository>();
+            services.AddScoped<Isys_modulesRepository, sys_modulesRepository>();
+            services.AddScoped<Isys_user_roleRepository, sys_user_roleRepository>();
+            services.AddScoped<Isys_role_modulesRepository, sys_role_modulesRepository>();
+            services.AddScoped<Isys_userRepository, sys_userRepository>();
 
 
             // 配置跨域处理，允许所有来源

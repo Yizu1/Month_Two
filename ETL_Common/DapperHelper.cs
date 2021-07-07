@@ -243,6 +243,68 @@ namespace ETL_Common
                 throw;
             }
         }
+
+        /// <summary>
+        /// 获取数据
+        /// MySql.Data.MySqlClient.MySqlException:“Unknown column 'a.WarehouseId' in 'field list'”</summary>
+        /// <typeparam name="T"></typeparam>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static List<T> GetLists<T>(string sql)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.conn))
+                {
+                    return db.Query<T>(sql).ToList();
+                }
+            }
+            catch (Exception ex)
+            {
+                string e = ex.Message;
+                throw;
+            }
+        }
+        /// <summary>
+        /// 获取受影响行数
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static int Execute(string sql)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.conn))
+                {
+                    return db.Execute(sql);
+                }
+            }
+            catch (Exception ex)
+            {
+                string e = ex.Message;
+                throw;
+            }
+        }
+        /// <summary>
+        /// 获取首行首列
+        /// </summary>
+        /// <param name="sql"></param>
+        /// <returns></returns>
+        public static object Exescalars(string sql)
+        {
+            try
+            {
+                using (IDbConnection db = new MySqlConnection(ConfigurationManager.conn))
+                {
+                    return db.ExecuteScalar(sql);
+                }
+            }
+            catch (Exception ex)
+            {
+                string e = ex.Message;
+                throw;
+            }
+        }
         #endregion
 
     }
