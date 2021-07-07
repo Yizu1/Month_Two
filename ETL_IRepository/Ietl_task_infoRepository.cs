@@ -8,6 +8,6 @@ namespace ETL_IRepository
 {
     public interface Ietl_task_infoRepository:IBaseRepository<ETL_Model.etl_task_info>
     {
-
+        Task< int> Upt(string id);
     }
 }

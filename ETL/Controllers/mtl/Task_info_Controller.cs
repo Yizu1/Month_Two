@@ -27,11 +27,11 @@ namespace ETL.Controllers.mtl
         /// <param name="a"></param>
         /// <returns></returns>
         [HttpPost("/api/task_info/insert")]
-        public IActionResult insert(ETL_Model.etl_task_info a)
+        public async Task<int> insert(ETL_Model.etl_task_info a)
         {
-            int n = _task.Insert(a);
+            int n =await _task.Insert(a);
 
-            return Ok(new { data = n });
+            return n;
         }
 
         /// <summary>
@@ -39,9 +39,9 @@ namespace ETL.Controllers.mtl
         /// </summary>
         /// <returns></returns>
         [HttpGet("/api/task_info/show")]
-        public IActionResult show(string name = "", int zt = -1, int quanz = 0)
+        public async Task<List<etl_task_info>> show(string name = "", int zt = -1, int quanz = 0)
         {
-            var ar = _task.GetList();
+            var ar =await _task.GetList();
             List<etl_task_info> ls = null;
 
 
@@ -49,37 +49,35 @@ namespace ETL.Controllers.mtl
             {
                 ar = (from x in ar
                       where (
-                            (string.IsNullOrEmpty(name) ? true : x.name.Contains(name))
-                            && ((zt != -1 ? (int)x.status == (int)zt : true))
+                       ((zt != -1 ? (int)x.status == (int)zt : true))
                             && ((quanz != 0 ? x.weight == ((weight)quanz) : true))
+                            && (string.IsNullOrEmpty(name) ? true : x.name.Contains(name))
+                            
                             )
                       select x).ToList();
-            }
-            if (zt != -1)
-            {
-                ar = ar.Where(x => x.statuss == ((status)zt).ToString()).ToList();
-            }
-            if (quanz != 0)
-            {
-                ar = ar.Where(x => x.weight == ((weight)quanz)).ToList();
-            }
-
-
-            return Ok(new { data = ar });
+            } 
+            return ar;
         }
 
         [HttpPut("/api/task_info/fill")]
-        public IActionResult fill(string id)
+        public async Task<etl_task_info> fill(string id)
         {
-            var ar = _task.TheFill(id);
-            return Ok(new { data = ar });
+            var ar =await _task.TheFill(id);
+            return ar;
         }
 
         [HttpDelete("/api/task_info/del")]
-        public IActionResult dele(string id)
+        public async Task<int>  dele(string id)
         {
-            int i = _task.Delete(id);
-            return Ok(new { data = i });
+            int i =await _task.Delete(id);
+            return  i ;
+        }
+
+        [HttpPost("/api/task_info/upt")]
+        public async Task<int> upt(string id)
+        {
+            int i = await _task.Upt(id);
+            return i;
         }
     }
 }

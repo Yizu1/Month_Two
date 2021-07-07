@@ -129,7 +129,7 @@ namespace ETL.Controllers
         /// <returns></returns>
         [Route("/api/SqlGetJson")]
         [HttpGet]
-        public async Task<string> SqlGetJson(string sql, string name, int flag)
+        public string SqlGetJson(string sql, string name, int flag)
         {
             try
             {
