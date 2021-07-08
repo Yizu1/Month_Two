@@ -35,7 +35,7 @@ namespace ETL.Controllers
         //数据库树         public async Task<string>  DatabaseTree()
         [Route("/api/DatabaseTree")]
         [HttpGet]
-        public string DatabaseTree()
+        public async  Task<string>  DatabaseTree()
         {
             try
             {

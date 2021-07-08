@@ -20,7 +20,7 @@ namespace ETL_Repository
         public List<Tid1Lxin> Bang()
         {
             string str = $"select * from Tid1Lxin";
-            var dt = _Tid1Lxin.GetDataSet(str).Tables[0];
+            var dt = _Tid1Lxin.GetDataSet(str).Result.Tables[0];
             var list = _Tid1Lxin.DataTableToList<Tid1Lxin>(dt);
             return list;
         }

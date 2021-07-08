@@ -5,6 +5,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Logging.Abstractions" Version="5.0.0" />
+    <PackageReference Include="StackExchange.Redis" Version="2.2.50" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\ETL_Common\ETL_Common.csproj" />
     <ProjectReference Include="..\ETL_IRepository\ETL_IRepository.csproj" />
     <ProjectReference Include="..\ETL_Model\ETL_Model.csproj" />
